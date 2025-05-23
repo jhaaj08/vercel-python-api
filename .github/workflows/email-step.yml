@@ -1,0 +1,16 @@
+name: Email Step Demo
+
+on:
+  push:
+    branches:
+      - main  # or whichever branch you want to trigger on
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: 21f1005745@ds.study.iitm.ac.in
+        run: echo "Hello, world from 21f1005745@ds.study.iitm.ac.in"
