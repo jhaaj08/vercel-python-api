@@ -2,8 +2,8 @@ name: Daily Commit
 
 on:
   schedule:
-    - cron: "17 5 * * *"  # Runs daily at 05:17 UTC
-  workflow_dispatch:       # Allows manual triggering
+    - cron: "21 13 * * *"  # Runs daily at 13:21 UTC
+  workflow_dispatch:
 
 jobs:
   daily-commit:
@@ -15,9 +15,9 @@ jobs:
 
       - name: Add a dummy commit - 21f1005745@ds.study.iitm.ac.in
         run: |
-          echo "Last updated at $(date)" > last-update.txt
-          git config user.name "github-actions"
-          git config user.email "21f1005745@ds.study.iitm.ac.in"
-          git add last-update.txt
-          git commit -m "Daily update: $(date)" || echo "No changes to commit"
-          git push
+          echo "Last run at $(date -u)" > .daily-update.txt
+          git config --global user.name "GitHub Actions Bot"
+          git config --global user.email "21f1005745@ds.study.iitm.ac.in"
+          git add .daily-update.txt
+          git commit -m "Automated daily commit: $(date -u)" || echo "No changes"
+          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
